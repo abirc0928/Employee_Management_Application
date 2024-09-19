@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block nav %}
+{% include 'partials/nav.html' %}
+{% endblock  %}
+{% block container %}
+  <div class="row mb-5">
+    {% for employee in employees %}
+      <div class="col-sm-6 mt-5">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ employee.name.upper }}</h5>
+
+            <p class="card-text">{{ employee.designation }}</p>
+            <p class="card-text">
+              {{ employee.get_truncated_content }} <a href="{% url 'employee_details' employee.id %}">read more</a>
+            </p>
+            <a href="{% url 'update_employee' employee.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'delete_employee' employee.id %}" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block title %}
+  Update and delete
+{% endblock %}
+

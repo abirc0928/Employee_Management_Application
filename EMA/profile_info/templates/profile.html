@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block nav %}
+  {% include 'partials/nav.html' %}
+{% endblock %}
+{% block container %}
+  {% if profile_exists %}
+    <!-- Show profile details if profile exists -->
+    <div class="row mb-5">
+      <h3 class="mb-2">{{ user.first_name.upper }} {{ user.last_name.upper }}</h3>
+      <p class="mb-2"><strong>Email:</strong> {{ user.email }}</p>
+      <p class="mb-2"><strong>Address:</strong> {{ user_profile_data.address }}</p>
+      <p class="mb-2"><strong>Phone:</strong> {{ user_profile_data.phone_number }}</p>
+      <p class="mb-2"><strong>Date of Birth:</strong> {{ user_profile_data.date_of_brith }}</p>
+      <p class="mb-2"><strong>Description:</strong> {{ user_profile_data.description }}</p>
+      <a class="btn btn-success" href="{% url 'update_profile' user_profile_data.id %}">Update</a>
+    </div>
+  {% else %}
+    <!-- Show add profile button if no profile exists -->
+    <div class="row mb-5">
+      <p>No profile found. Please add your profile.</p>
+      <a class="btn btn-success" href="{% url 'add_profile' %}">Add profile</a>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block title %}
+  Profile
+{% endblock %}

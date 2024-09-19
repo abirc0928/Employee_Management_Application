@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block nav %}
+{% include 'partials/nav.html' %}
+{% endblock  %}
+{% block container %}
+  <div class="m-5">
+    <h5>{{ employee.name.upper }}</h5>
+    <p><span class="fw-bold">Address: </span>{{ employee.address }}</p>
+    <p><span class="fw-bold">Phone: </span>{{ employee.phone_number }}</p>
+    <p><span class="fw-bold">Salary: </span> {{ employee.salary }}</p>
+    <p><span class="fw-bold">Designation: </span> {{ employee.designation }}</p>
+    <p><span class="fw-bold">Added by: </span> {{ employee.user.first_name.capitalize }}</p>
+    <p><span class="fw-bold">Details: </span> {{ employee.short_description }}</p>
+  </div>
+{% endblock %}
+
+{% block title %}
+  Employee details
+{% endblock %}

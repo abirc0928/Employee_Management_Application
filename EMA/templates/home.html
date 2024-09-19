@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block nav %}
+  {% include 'partials/nav.html' %}
+{% endblock %}
+{% block container %}
+  <div class="row mb-5">
+    {% if employees %}
+    {% for employee in employees %}
+      <div class="col-sm-6 mt-5">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ employee.name.upper }}</h5>
+
+            <p class="card-text">{{ employee.designation }}</p>
+            <p class="card-text">Added by: {{ employee.user.first_name}}</p>
+            <p class="card-text">
+              {{ employee.get_truncated_content }} <a href="{% url 'employee_details' employee.id %}">read more</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    {% else %}
+    <p class="text-danger">No employees found.</p>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block title %}
+  Home
+{% endblock %}

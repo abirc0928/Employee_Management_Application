@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'homepage' %}">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'add_employee' %}">Add employee</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'update_and_delete' %}">Update and Delete</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'profile' request.user %}">Profile</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'logout_view' %}">Logout</a>
+        </li>
+      </ul>
+      <form class="d-flex" method="GET" action="{% url 'homepage' %}" id="search-form">
+        <input class="form-control me-2" type="search" name="q" id="search-input" placeholder="Search employees..." aria-label="Search" value="{{ request.GET.q }}">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<script>
+  const searchInput = document.getElementById('search-input');
+  searchInput.addEventListener('input', function() {
+    if (searchInput.value === '') {
+      window.location.href = "{% url 'homepage' %}";
+    }
+  });
+</script>
